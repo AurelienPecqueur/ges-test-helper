@@ -3,13 +3,9 @@ var util = require('util')
 	, spawn = require('child_process').spawn
 	, path = require('path')
 	, cmdDir = process.env.ES_BIN || path.resolve(__dirname, 'EventStore')
-	, cmd = path.resolve(cmdDir, 'clusternode')
+	, cmd = path.resolve(cmdDir, 'EventStore.ClusterNode.exe')
 	, opts = {
 			cwd: cmdDir
-		, env: {
-				'LD_LIBRARY_PATH': cmdDir + ':$LD_LIBRARY_PATH'
-			, 'MONO_GC_DEBUG': 'clear-at-gc'
-			}
 		}
 	, currentPort = 5000
 
@@ -35,7 +31,7 @@ function MemoryStore(done) {
 		es.stdout.on('data', function(data) {
 			//console.log('[LOG] : ' + data.toString())
 			var logLine = data.toString()
-			if(logLine.indexOf("'$users' projection source has been written") !== -1) {
+			if(logLine.indexOf("'admin' user added to $users") !== -1) {
 				isIntialized = true
 				done(null, {
 					host: settings.ip
