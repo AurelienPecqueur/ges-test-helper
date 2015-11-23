@@ -7,7 +7,7 @@ var util = require('util')
 	, opts = {
 			cwd: cmdDir
 		}
-	, currentPort = 5000
+	, currentPort = 5001
 
 module.exports = MemoryStore
 
@@ -126,7 +126,7 @@ MemoryStore.prototype.cleanup = function(cb) {
 }
 
 function getSettings() {
-	currentPort += 1
+	//currentPort += 1
 	return {
 		ip: '127.0.0.1'
 	, tcpPort: currentPort
